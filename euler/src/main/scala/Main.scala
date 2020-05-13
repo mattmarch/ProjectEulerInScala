@@ -1,4 +1,6 @@
 import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.Map
+import scala.math.pow
 
 object Main extends App {
 
@@ -11,6 +13,7 @@ object Main extends App {
       case "2" => Problem2
       case "3" => Problem3
       case "4" => Problem4
+      case "5" => Problem5
       case _ => "Not solved yet!"
     }
   )
@@ -56,5 +59,32 @@ object Main extends App {
   }
 
   def numberIsPalindrome(number: Int) = number.toString == number.toString.reverse
-  
+
+  def Problem5 = {
+    val factorCounts = Map[Int, Int]()
+    for (i <- 2 to 20) {
+      val factors = factoriseInt(i)
+      for (factor <- factors.distinct) {
+        val factorCount = factors.count(_ == factor)
+        if (!factorCounts.contains(factor) || factorCount > factorCounts(factor)) {
+          factorCounts += (factor -> factorCount)
+        }
+      }
+    }
+    factorCounts.keys.reduce((total, factor) => total * pow(factor, factorCounts(factor)).toInt)
+
+  }
+
+    def factoriseInt(number: Int): List[Int] = {
+    val maxToTry = number / 2
+    var divisor = 2
+    while (divisor < maxToTry) {
+      if (number % divisor == 0) {
+        return List(divisor) ++: factoriseInt(number / divisor)
+      }
+      divisor += 1
+    }
+    List(number)
+  }
+
 }
