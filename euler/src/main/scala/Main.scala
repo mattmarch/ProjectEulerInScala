@@ -10,6 +10,7 @@ object Main extends App {
       case "1" => Problem1
       case "2" => Problem2
       case "3" => Problem3
+      case "4" => Problem4
       case _ => "Not solved yet!"
     }
   )
@@ -47,4 +48,12 @@ object Main extends App {
     }
     List(number)
   }
+
+  def Problem4 = {
+    val threeDigitNumbers = 100 to 999
+    val products = for (x <- threeDigitNumbers; y <- threeDigitNumbers) yield x * y
+    products.filter(numberIsPalindrome).max
+  }
+
+  def numberIsPalindrome(number: Int) = number.toString == number.toString.reverse
 }
