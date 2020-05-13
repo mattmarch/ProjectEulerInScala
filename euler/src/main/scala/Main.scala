@@ -9,6 +9,7 @@ object Main extends App {
     args(0) match {
       case "1" => Problem1
       case "2" => Problem2
+      case "3" => Problem3
       case _ => "Not solved yet!"
     }
   )
@@ -28,5 +29,22 @@ object Main extends App {
     }
     fibonacci.trimEnd(1)
     fibonacci.filter(_ % 2 == 0).reduce(_ + _)
+  }
+
+  def Problem3 = {
+    val target = 600851475143L
+    factorise(target).max
+  }
+
+  def factorise(number: Long): List[Long] = {
+    val maxToTry = number / 2
+    var divisor = 2L
+    while (divisor < maxToTry) {
+      if (number % divisor == 0) {
+        return List(divisor) ++: factorise(number / divisor)
+      }
+      divisor += 1
+    }
+    List(number)
   }
 }
