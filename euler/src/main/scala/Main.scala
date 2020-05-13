@@ -18,18 +18,18 @@ object Main extends App {
   def Problem1 = {
     val range = (1 to 999).toList
     val multiples = range.filter(i => i % 3 == 0 || i % 5 == 0)
-    multiples.reduce(_ + _)
+    multiples.sum
   }
 
   def Problem2 = {
     val limit = 4000000
     val fibonacci = ArrayBuffer(0, 1)
     while (fibonacci.head <= limit) {
-      val nextNumber = fibonacci.take(2).reduce(_ + _)
+      val nextNumber = fibonacci.take(2).sum
       fibonacci.prepend(nextNumber)
     }
     fibonacci.trimEnd(1)
-    fibonacci.filter(_ % 2 == 0).reduce(_ + _)
+    fibonacci.filter(_ % 2 == 0).sum
   }
 
   def Problem3 = {
@@ -56,4 +56,5 @@ object Main extends App {
   }
 
   def numberIsPalindrome(number: Int) = number.toString == number.toString.reverse
+  
 }
