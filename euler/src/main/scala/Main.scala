@@ -77,16 +77,8 @@ object Main extends App {
 
   }
 
-    def factoriseInt(number: Int): List[Int] = {
-    val maxToTry = number / 2
-    var divisor = 2
-    while (divisor < maxToTry) {
-      if (number % divisor == 0) {
-        return List(divisor) ++: factoriseInt(number / divisor)
-      }
-      divisor += 1
-    }
-    List(number)
+  def factoriseInt(number: Int): List[Int] = {
+      factorise(number.toLong).map(_.toInt)
   }
 
   def Problem6 = {
@@ -94,6 +86,10 @@ object Main extends App {
     val squaredSum = BigInt(natNumbers.sum).pow(2)
     val sumSquares = natNumbers.map(BigInt(_)pow(2)).sum
     squaredSum - sumSquares
+  }
+
+  def Problem7 = {
+
   }
 
 }
