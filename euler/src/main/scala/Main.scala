@@ -19,6 +19,7 @@ object Main extends App {
       case "7" => Problem7
       case "8" => Problem8
       case "9" => Problem9
+      case "10" => Problem10
       case _ => "Not solved yet!"
     }
   )
@@ -104,7 +105,11 @@ object Main extends App {
   }
 
   def isPrime(number: Int): Boolean = {
-    factorise(number.toLong).length == 1
+    if (number % 2 == 0 && number != 2) return false
+    for (i <- 3 to number / 2 by 2) {
+      if (number % i == 0) return false
+    }
+    true
   }
 
   def Problem8 = {
@@ -118,6 +123,12 @@ object Main extends App {
       c <- 1 to 1000; b <- 1 to c; a <- 1 to b
       if pow(a, 2) + pow(b, 2) == pow(c, 2) && a + b + c == 1000
     } yield a * b * c
+  }
+
+  def Problem10 = {
+    println("This may take a while, go make a cup of tea...")
+    val numbers = 2 to 1999999
+    numbers.filter(isPrime(_)).map(_.toLong).sum
   }
 
 }
