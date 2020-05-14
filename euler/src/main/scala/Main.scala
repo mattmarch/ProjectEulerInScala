@@ -1,6 +1,7 @@
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.Map
 import scala.math.pow
+import scala.math.BigInt
 
 object Main extends App {
 
@@ -14,6 +15,7 @@ object Main extends App {
       case "3" => Problem3
       case "4" => Problem4
       case "5" => Problem5
+      case "6" => Problem6
       case _ => "Not solved yet!"
     }
   )
@@ -85,6 +87,13 @@ object Main extends App {
       divisor += 1
     }
     List(number)
+  }
+
+  def Problem6 = {
+    val natNumbers = 1 to 100
+    val squaredSum = BigInt(natNumbers.sum).pow(2)
+    val sumSquares = natNumbers.map(BigInt(_)pow(2)).sum
+    squaredSum - sumSquares
   }
 
 }
