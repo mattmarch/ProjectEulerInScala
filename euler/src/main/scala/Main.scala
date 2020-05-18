@@ -65,18 +65,13 @@ object Main extends App {
   def numberIsPalindrome(number: Int) = number.toString == number.toString.reverse
 
   def Problem5 = {
-    val factorCounts = Map[Int, Int]()
-    for (i <- 2 to 20) {
-      val factors = factoriseInt(i)
-      for (factor <- factors.distinct) {
-        val factorCount = factors.count(_ == factor)
-        if (!factorCounts.contains(factor) || factorCount > factorCounts(factor)) {
-          factorCounts += (factor -> factorCount)
-        }
-      }
-    }
-    factorCounts.keys.reduce((total, factor) => total * pow(factor, factorCounts(factor)).toInt)
-
+    val factorisedNumbers = (2 to 20).map(factoriseInt)
+    val primes = List(2, 3, 5, 7, 11, 13, 17, 19)
+    
+    primes.map(prime => {
+      val maxOccurances = factorisedNumbers.map(_.count(_ == prime)).max
+      pow(prime, maxOccurances).toInt
+    }).product
   }
 
   def factoriseInt(number: Int): List[Int] = {
