@@ -67,7 +67,7 @@ object Main extends App {
   def Problem5 = {
     val factorisedNumbers = (2 to 20).map(factoriseInt)
     val primes = List(2, 3, 5, 7, 11, 13, 17, 19)
-    
+
     primes.map(prime => {
       val maxOccurances = factorisedNumbers.map(_.count(_ == prime)).max
       pow(prime, maxOccurances).toInt
@@ -98,11 +98,13 @@ object Main extends App {
   }
 
   def isPrime(number: Int): Boolean = {
-    if (number % 2 == 0 && number != 2) return false
-    for (i <- 3 to number / 2 by 2) {
-      if (number % i == 0) return false
+    val divisorsToTry: Stream[Int] = 2 #:: (Stream.iterate(3)(_ + 2).takeWhile(_ < number / 2))
+    divisorsToTry.find(number % _ == 0) match {
+      case Some(_) =>
+        false
+      case None =>
+        true
     }
-    true
   }
 
   def Problem8 = {
