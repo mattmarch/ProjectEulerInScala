@@ -47,15 +47,13 @@ object Main extends App {
   }
 
   def factorise(number: Long): List[Long] = {
-    val maxToTry = number / 2
-    var divisor = 2L
-    while (divisor < maxToTry) {
-      if (number % divisor == 0) {
-        return List(divisor) ++: factorise(number / divisor)
-      }
-      divisor += 1
+    val divisorsToTry = 2L #:: Stream.iterate(3L)(_ + 2).takeWhile(_ < number / 2)
+    divisorsToTry.find(number % _ == 0) match {
+      case Some(divisor) =>
+        List(divisor) ++: factorise(number / divisor)
+      case None =>
+        List(number)
     }
-    List(number)
   }
 
   def Problem4 = {
