@@ -98,7 +98,7 @@ object Main extends App {
   }
 
   def isPrime(number: Int): Boolean = {
-    val divisorsToTry: Stream[Int] = 2 #:: (Stream.iterate(3)(_ + 2).takeWhile(_ < number / 2))
+    val divisorsToTry = (2 #:: Stream.iterate(3)(_ + 2)).takeWhile(i => i*i <= number)
     divisorsToTry.find(number % _ == 0) match {
       case Some(_) =>
         false
@@ -121,9 +121,7 @@ object Main extends App {
   }
 
   def Problem10 = {
-    println("This may take a while, go make a cup of tea...")
     val numbers = 2 to 1999999
-    numbers.filter(isPrime(_)).map(_.toLong).sum
+    numbers.filter(isPrime).map(_.toLong).sum
   }
-
 }
