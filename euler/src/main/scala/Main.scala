@@ -1,5 +1,3 @@
-import scala.collection.mutable.ArrayBuffer
-import scala.collection.mutable.Map
 import scala.math.pow
 import scala.math.BigInt
 
