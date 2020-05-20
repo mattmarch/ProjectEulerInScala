@@ -32,13 +32,9 @@ object Main extends App {
 
   def Problem2 = {
     val limit = 4000000
-    val fibonacci = ArrayBuffer(0, 1)
-    while (fibonacci.head <= limit) {
-      val nextNumber = fibonacci.take(2).sum
-      fibonacci.prepend(nextNumber)
-    }
-    fibonacci.trimEnd(1)
-    fibonacci.filter(_ % 2 == 0).sum
+    val fibonacci = Stream.iterate((0, 1))(pair => (pair._2, pair._1 + pair._2)).map(_._1)
+
+    fibonacci.takeWhile(_ <= limit).filter(_ % 2 == 0).sum
   }
 
   def Problem3 = {
