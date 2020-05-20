@@ -86,15 +86,8 @@ object Main extends App {
   }
 
   def Problem7 = {
-    var count = 1
-    var numberToTest = 1
-    while (count < 10001) {
-      numberToTest += 2
-      if (isPrime(numberToTest)) {
-        count += 1
-      }
-    }
-    numberToTest
+    val numbersToTest = 2 #:: Stream.iterate(3)(_ + 2)
+    numbersToTest.filter(isPrime)(10000)
   }
 
   def isPrime(number: Int): Boolean = {
